@@ -42,7 +42,7 @@ print("Cosine similarity:", round(sim, 4))
 
 ### Model variants
 
-- `cczzzyyy/DrugSpace-mntp-8B`: MNTP-trained base model built on `Llama-3.1-8B`.
+- `cczzzyyy/DrugSpace-mntp-8B`: MNTP-trained base model built on `Llama-3.1-8B-Instruct`.
 - `cczzzyyy/DrugSpace-full-lora`: contrastive-learning LoRA model on top of `cczzzyyy/DrugSpace-mntp-8B`; recommended for general embedding generation.
 - `cczzzyyy/DrugSpace-full-lora-eval`: evaluation-oriented checkpoint trained only on pre-2020 drugs.
 
