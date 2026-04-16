@@ -4,9 +4,8 @@ This is an official implementation and demonstration of the DrugSpace paper.
 
 ![Workflow](images/fig1.png)
 
-<hr>
 
-### Environment / Installation
+## Environment / Installation
 
 ```bash
 # create and activate a fresh environment
@@ -17,7 +16,7 @@ conda activate your_env
 pip install -r requirements.txt
 ```
 
-### Quick start
+## Quick start
 
 ```python
 from llm2vec import LLM2Vec
@@ -47,25 +46,25 @@ sim = F.cosine_similarity(
 print("Cosine similarity:", round(sim, 4))
 ```
 
-### Model variants
+## Model variants
 
 - `cczzzyyy/DrugSpace-mntp-8B`: MNTP-trained base model built on `Llama-3.1-8B-Instruct`.
 - `cczzzyyy/DrugSpace-full-lora`: contrastive-learning LoRA model on top of `cczzzyyy/DrugSpace-mntp-8B`; recommended for general embedding generation.
 - `cczzzyyy/DrugSpace-full-lora-eval`: evaluation-oriented checkpoint trained only on pre-2020 drugs.
 
-### Input format recommendations
+## Input format recommendations
 
 - Provide complete English drug descriptions.
 - Keep wording clinically meaningful and specific; avoid placeholder or template-only text when possible.
 - For retrieval/similarity tasks, use consistent writing style across query and candidate descriptions to reduce stylistic noise.
 
-### Output interpretation
+## Output interpretation
 
 - `l2v.encode(...)` returns one embedding vector per input text, typically with shape `(N, D)`.
 - Higher cosine similarity generally indicates stronger semantic/functional relatedness between two drug descriptions.
 - For retrieval, rank candidate drugs by cosine similarity to the query embedding and report metrics such as Recall@K or MRR.
 
-### Released `.npy` drug embeddings
+## Released `.npy` drug embeddings
 
 We also provide precomputed drug embeddings in `.npy` format as part of the release.
 
@@ -76,7 +75,7 @@ emb = np.load("path/to/drug_embeddings.npy")
 print(emb.shape)  # (num_drugs, hidden_dim)
 ```
 
-### Generate embeddings from raw text
+## Generate embeddings from raw text
 
 Use the same `encode` API to generate embeddings for new descriptions:
 
@@ -90,7 +89,7 @@ new_emb = l2v.encode(
 )
 ```
 
-### Visualization in [MedViz](https://medviz.org/)
+## Visualization in [MedViz](https://medviz.org/)
 <!-- ![Viz](images/fig2.png) -->
 <p align="center">
   <img src="images/fig2.png" alt="DrugSpace overview" width="900">
