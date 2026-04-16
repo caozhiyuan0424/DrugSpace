@@ -1,3 +1,11 @@
 data/
 terminal.ipynb
 
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+__pycache__/
+**/__pycache__/
+*.pyc
+
+.DS_Store
