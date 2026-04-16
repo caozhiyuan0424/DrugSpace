@@ -1,4 +1,9 @@
-# DrugSpace: A literature-based drug embedding resource for biomedical research
+# DrugSpace: A literature-based drug embedding resource for biomedical research using large language models
+
+This is an official implementation and demonstration of the DrugSpace paper
+
+![Workflow](images/fig1.png)
+
 
 ### Environment / Installation
 
@@ -83,6 +88,10 @@ new_emb = l2v.encode(
     show_progress_bar=True,
 )
 ```
+
+### Visualization in [MedViz](https://medviz.org/)
+![Viz](images/fig2.png)
+
 
 ## Evaluation
 
