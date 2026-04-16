@@ -90,10 +90,7 @@ new_emb = l2v.encode(
 ```
 
 ## Visualization in [MedViz](https://medviz.org/)
-<!-- ![Viz](images/fig2.png) -->
-<p align="center">
-  <img src="images/fig2.png" alt="DrugSpace overview" width="900">
-</p>
+![Viz](images/fig2.png)
 
 ## Evaluation
 
