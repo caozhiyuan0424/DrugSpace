@@ -1,0 +1,14 @@
+numpy>=1.26
+pandas>=2.2
+torch>=2.3
+transformers>=4.44
+sentence-transformers>=3.0
+huggingface_hub>=0.24
+safetensors>=0.4
+tqdm>=4.66
+scikit-learn>=1.5
+scipy>=1.13
+PyYAML>=6.0
+accelerate>=0.30
+peft>=0.10
+llm2vec>=0.2

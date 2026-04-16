@@ -1,0 +1,13 @@
+{
+  "mean_diff_normalized": 0.059887610375881195,
+  "std_diff_normalized": 0.19977493584156036,
+  "mean_diff_raw": 0.0021995464339852333,
+  "std_diff_raw": 0.0073373145423829556,
+  "accuracy": 0.6446886446886447,
+  "accuracy_normalized": 0.6446886446886447,
+  "num_triplets": 273,
+  "mean_sim_rel": 0.9783879518508911,
+  "mean_sim_unrel": 0.9761884808540344,
+  "std_sim_rel": 0.006081750150769949,
+  "std_sim_unrel": 0.005570867098867893
+}

@@ -1,0 +1,98 @@
+{
+  "bert-base": {
+    "display_name": "BERT-base",
+    "metrics": {
+      "mean_diff_normalized": 0.04099413752555847,
+      "std_diff_normalized": 0.1980070024728775,
+      "mean_diff_raw": 0.016345439478754997,
+      "std_diff_raw": 0.07895059138536453,
+      "accuracy": 0.5970695970695971,
+      "accuracy_normalized": 0.5970695970695971,
+      "num_triplets": 273,
+      "mean_sim_rel": 0.7994953393936157,
+      "mean_sim_unrel": 0.783149778842926,
+      "std_sim_rel": 0.06214294210076332,
+      "std_sim_unrel": 0.059514738619327545
+    }
+  },
+  "biobert": {
+    "display_name": "BioBERT",
+    "metrics": {
+      "mean_diff_normalized": 0.022306378930807114,
+      "std_diff_normalized": 0.17513734102249146,
+      "mean_diff_raw": 0.003667996032163501,
+      "std_diff_raw": 0.028799068182706833,
+      "accuracy": 0.5604395604395604,
+      "accuracy_normalized": 0.5604395604395604,
+      "num_triplets": 273,
+      "mean_sim_rel": 0.9145424962043762,
+      "mean_sim_unrel": 0.9108745455741882,
+      "std_sim_rel": 0.0245104618370533,
+      "std_sim_unrel": 0.02200559340417385
+    }
+  },
+  "pubmedbert": {
+    "display_name": "PubMedBERT",
+    "metrics": {
+      "mean_diff_normalized": 0.059887610375881195,
+      "std_diff_normalized": 0.19977493584156036,
+      "mean_diff_raw": 0.0021995464339852333,
+      "std_diff_raw": 0.0073373145423829556,
+      "accuracy": 0.6446886446886447,
+      "accuracy_normalized": 0.6446886446886447,
+      "num_triplets": 273,
+      "mean_sim_rel": 0.9783879518508911,
+      "mean_sim_unrel": 0.9761884808540344,
+      "std_sim_rel": 0.006081750150769949,
+      "std_sim_unrel": 0.005570867098867893
+    }
+  },
+  "sapbert": {
+    "display_name": "SapBERT",
+    "metrics": {
+      "mean_diff_normalized": 0.0922672301530838,
+      "std_diff_normalized": 0.21054665744304657,
+      "mean_diff_raw": 0.050194766372442245,
+      "std_diff_raw": 0.11454055458307266,
+      "accuracy": 0.6483516483516484,
+      "accuracy_normalized": 0.6483516483516484,
+      "num_triplets": 273,
+      "mean_sim_rel": 0.48399773240089417,
+      "mean_sim_unrel": 0.4338029623031616,
+      "std_sim_rel": 0.09631660580635071,
+      "std_sim_unrel": 0.06774360686540604
+    }
+  },
+  "llama-pure": {
+    "display_name": "Llama-3.1-8B-Instruct",
+    "metrics": {
+      "mean_diff_normalized": 0.05073094740509987,
+      "std_diff_normalized": 0.1854865700006485,
+      "mean_diff_raw": 0.026925532147288322,
+      "std_diff_raw": 0.0984472930431366,
+      "accuracy": 0.5897435897435898,
+      "accuracy_normalized": 0.5897435897435898,
+      "num_triplets": 273,
+      "mean_sim_rel": 0.7117186784744263,
+      "mean_sim_unrel": 0.6847931146621704,
+      "std_sim_rel": 0.0785340964794159,
+      "std_sim_unrel": 0.07558247447013855
+    }
+  },
+  "drugspace": {
+    "display_name": "DrugSpace",
+    "metrics": {
+      "mean_diff_normalized": 0.17073941230773926,
+      "std_diff_normalized": 0.2182246744632721,
+      "mean_diff_raw": 0.13824541866779327,
+      "std_diff_raw": 0.1766936033964157,
+      "accuracy": 0.7802197802197802,
+      "accuracy_normalized": 0.7802197802197802,
+      "num_triplets": 273,
+      "mean_sim_rel": 0.38141506910324097,
+      "mean_sim_unrel": 0.2431696206331253,
+      "std_sim_rel": 0.15134428441524506,
+      "std_sim_unrel": 0.08333596587181091
+    }
+  }
+}
