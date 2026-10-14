@@ -39,29 +39,6 @@ python embed.py --input data/drugs.csv --output outputs/embeddings
 
 The output contains normalized `embeddings.npy` and `metadata.csv` in matching row order. For the released openFDA multi-view embeddings, use `openfda_drugs.csv` and `build_release.py` from Zenodo: normalize each text-view embedding, average the views for each drug, then normalize again. The release also includes the fixed openFDA training triplets and MNTP PMID splits. See [Tutorial.ipynb](Tutorial.ipynb) for nearest-neighbor retrieval from the released embeddings.
 
-## Models and encoding
-
-All three evaluation tasks use the encoder in `embed.py`: **512 tokens, mean pooling and L2 normalization**. Padding tokens are excluded from pooling. DrugSpace excludes instruction tokens.
-
-| `--model` | Model |
-| --- | --- |
-| `drugspace` | `z-cao/DrugSpace-8B`, full public openFDA model |
-| `drugspace-eval` | `z-cao/DrugSpace-eval-8B`, public evaluation model |
-| `drugbank` | `z-cao/DrugSpace-mntp-eval-8B` plus your locally trained `--adapter` |
-| `bert` | `bert-base-uncased` |
-| `biobert` | `dmis-lab/biobert-base-cased-v1.2` |
-| `pubmedbert` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` |
-| `sapbert` | `cambridgeltl/SapBERT-from-PubMedBERT-fulltext` |
-| `llama` | `meta-llama/Llama-3.1-8B-Instruct` |
-| `biomistral` | `BioMistral/BioMistral-7B` |
-
-Use `--model-path` for a local model or alternate Hub ID and `--batch-size` to fit device memory. Evaluation defaults to `drugspace-eval`. DrugSpace uses bidirectional attention; the Llama and BioMistral baselines retain causal attention.
-
-<details>
-<summary>Optional: EmbeddingGemma (separate environment)</summary>
-
-EmbeddingGemma is excluded from the default installation and is only loaded when explicitly selected with `--model embeddinggemma`. It uses `google/embeddinggemma-300m` with native mean pooling and learned projection. Its Transformers version differs from LLM2Vec's requirements:
-
 ```bash
 python -m venv .venv-gemma
 source .venv-gemma/bin/activate
