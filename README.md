@@ -1,4 +1,4 @@
-# DrugSpace
+# DrugSpace: A literature-based drug embedding resource for biomedical research using large language models
 
 Drug embeddings from biomedical literature and drug descriptions. The public release uses openFDA labels and includes 1,867 drug embeddings with 4,096 dimensions.
 
