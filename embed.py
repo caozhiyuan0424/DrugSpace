@@ -27,6 +27,14 @@ def model_args(parser, default="drugspace-eval"):
     parser.add_argument("--batch-size", type=int, default=4)
 
 
+def skip_untrained_drugbank(args):
+    if args.model == "drugbank" and not args.adapter:
+        print("SKIPPED DrugSpace (DrugBank): no --adapter supplied. "
+              "Use --model drugspace-eval or a baseline, or provide your trained adapter.")
+        return True
+    return False
+
+
 def normalize(values):
     values = np.asarray(values, dtype=np.float32)
     if values.ndim != 2 or not np.isfinite(values).all():
@@ -48,6 +56,7 @@ class Encoder:
         if adapter and model not in {"drugspace", "drugspace-eval", "drugbank"}:
             raise ValueError("Adapters are supported only for DrugSpace models")
         self.batch_size = batch_size
+        self._cache = {}  # Reuse identical text vectors across batches and encode calls.
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         path = model_path or MODELS[model]
         self.kind = "gemma" if model == "embeddinggemma" else "hf"
@@ -87,10 +96,10 @@ class Encoder:
         texts = list(texts)
         if not texts or any(not isinstance(text, str) for text in texts):
             raise ValueError("Provide a nonempty sequence of strings")
-        batches = []
+        missing = list(dict.fromkeys(text for text in texts if text not in self._cache))
         with torch.inference_mode():
-            for start in range(0, len(texts), self.batch_size):
-                batch = texts[start:start + self.batch_size]
+            for start in range(0, len(missing), self.batch_size):
+                batch = missing[start:start + self.batch_size]
                 if self.kind == "llm2vec":
                     tokens = self.model.tokenize([
                         self.model.prepare_for_tokenization(SEPARATOR + text) for text in batch
@@ -111,8 +120,8 @@ class Encoder:
                     values = (hidden * mask).sum(1) / mask.sum(1).clamp(min=1)
                 if isinstance(values, torch.Tensor):
                     values = values.float().cpu().numpy()
-                batches.append(normalize(values))
-        return np.concatenate(batches)
+                self._cache.update(zip(batch, normalize(values)))
+        return np.stack([self._cache[text] for text in texts])
 
 
 def main():

@@ -1,9 +1,10 @@
-# DrugSpace: A literature-based drug embedding resource for biomedical research using large language models
+# DrugSpace
 
 Drug embeddings from biomedical literature and drug descriptions. The public release uses openFDA labels and includes 1,867 drug embeddings with 4,096 dimensions.
 
 - [Models](https://huggingface.co/z-cao/DrugSpace-8B)
 - [Data, embeddings and reproduction resources](https://doi.org/10.5281/zenodo.23022876)
+- [Interactive visualization](https://medviz.org/)
 
 ![DrugSpace workflow: literature MNTP followed by openFDA or DrugBank contrastive alignment](images/fig1.png)
 
@@ -54,7 +55,7 @@ See [Tutorial.ipynb](Tutorial.ipynb) for nearest-neighbor retrieval from the rel
 
 ## Reproduce the DrugBank model
 
-Users with DrugBank access can generate the fixed triplets from their licensed XML and train Stage II locally. For the evaluation model, use DrugBank v5.1.5 (2020-01-03) and the pre-2020 MNTP base:
+Users with DrugBank access can generate the fixed triplets from their licensed XML and train Stage II locally on two GPUs. For the evaluation model, use DrugBank v5.1.5 (2020-01-03) and the public [pre-2020 MNTP base](https://huggingface.co/z-cao/DrugSpace-mntp-eval-8B), which is downloaded automatically:
 
 ```bash
 python data_process/parse_drugbank.py \
@@ -70,6 +71,8 @@ torchrun --standalone --nproc_per_node=2 train.py \
 The commands generate a fixed triplet file and save the trained adapter to `outputs/drugbank-eval`.
 
 ## Evaluation
+
+Each command evaluates one model and defaults to the public OpenFDA model (`drugspace-eval`). A trained DrugBank model is optional.
 
 Parse both licensed DrugBank snapshots before running evaluation:
 
@@ -108,7 +111,7 @@ python evaluation/robustness_eval.py \
 
 Measures retrieval and embedding stability under sentence shuffling and span deletion.
 
-Append `--model bert` to select a baseline, or `--model drugbank --adapter outputs/drugbank-eval` to evaluate your trained DrugBank model. Use `--help` for other options. Each task saves `scores.csv` and `metrics.json` under its output directory.
+Append `--model bert` to select a baseline, or `--model drugbank --adapter outputs/drugbank-eval` to evaluate your trained DrugBank model. Selecting `drugbank` without an adapter prints a skip message and exits successfully without generating results. Use `--help` for other options. Each completed task saves `scores.csv` and `metrics.json` under its output directory; use a separate directory for each model.
 
 ## Interactive visualization
 

@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from embed import Encoder, model_args
+from embed import Encoder, model_args, skip_untrained_drugbank
 
 
 def summarize(data, replicates=10000):
@@ -44,6 +44,8 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     model_args(parser)
     args = parser.parse_args()
+    if skip_untrained_drugbank(args):
+        return
     data = pd.read_csv(args.input, dtype=str, keep_default_na=False)
     columns = [f"{key}_description_masked" for key in ("drug1", "drug_related", "drug_unrelated")]
     if data.empty or not data[columns].apply(lambda col: col.str.strip().ne("").all()).all():

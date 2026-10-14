@@ -12,7 +12,7 @@ from scipy.stats import t
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from data_process.parse_drugbank import cohorts
-from embed import Encoder, model_args
+from embed import Encoder, model_args, skip_untrained_drugbank
 
 SEEDS = (42, 43, 44, 45, 46)
 STRENGTHS = (10, 15, 25)
@@ -85,6 +85,7 @@ def variants(query):
 
 
 def top10(scores):
+    # Break exact ties by reference CSV order, retaining every drug candidate.
     return set(np.argsort(-scores, kind="stable")[:10])
 
 
@@ -112,6 +113,8 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     model_args(parser)
     args = parser.parse_args()
+    if skip_untrained_drugbank(args):
+        return
     reference, query = cohorts(args.reference, args.later)
     reference = reference[reference.description.str.len() >= 10]
     query = query[query.description.str.len() >= 10]

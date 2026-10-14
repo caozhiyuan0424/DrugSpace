@@ -10,7 +10,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from data_process.parse_drugbank import cohorts
-from embed import Encoder, model_args
+from embed import Encoder, model_args, skip_untrained_drugbank
 
 
 def prepare(reference_csv, later_csv):
@@ -45,6 +45,8 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     model_args(parser)
     args = parser.parse_args()
+    if skip_untrained_drugbank(args):
+        return
     reference, query = prepare(args.reference, args.later)
     encoder = Encoder(args.model, args.model_path, args.adapter, args.batch_size)
     refs = encoder.encode(reference.description)

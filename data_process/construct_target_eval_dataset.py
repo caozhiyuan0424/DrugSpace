@@ -30,7 +30,7 @@ def construct(reference_csv, later_csv, triplet_ids):
         if anchor not in query_ids or positive not in reference.index or negative not in reference.index:
             raise ValueError(f"Triplet does not match the temporal split: {item}")
         row = {"drug1": anchor, "drug_related": positive, "drug_unrelated": negative,
-               "shared_target": item["shared_target_id"]}
+               "shared_target": item.get("shared_target_id", "")}
         for label, drug_id in (("drug1", anchor), ("drug_related", positive), ("drug_unrelated", negative)):
             source = later.loc[drug_id] if label == "drug1" else reference.loc[drug_id]
             text = source["description_raw" if label == "drug1" else "description"]
