@@ -19,27 +19,38 @@ Run commands from the repository root. On a cluster, run data processing and mod
 
 Optional EmbeddingGemma support requires a separate environment with `transformers==4.57.1` and `sentence-transformers==5.1.1`.
 
-## Use DrugSpace
+## Quick start
+
+Load DrugSpace directly from [Hugging Face](https://huggingface.co/z-cao/DrugSpace-8B):
 
 ```python
-from embed import Encoder
+from llm2vec import LLM2Vec
+import torch
+import torch.nn.functional as F
 
-encoder = Encoder("drugspace")
-vectors = encoder.encode([
+l2v = LLM2Vec.from_pretrained(
+    base_model_name_or_path="z-cao/DrugSpace-8B",
+    enable_bidirectional=True,
+    pooling_mode="mean",
+    max_length=512,
+    doc_max_length=512,
+    skip_instruction=True,
+    device_map="cuda" if torch.cuda.is_available() else "cpu",
+    torch_dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
+)
+
+texts = [
     "A selective serotonin reuptake inhibitor used to treat depression.",
     "A beta-adrenergic receptor antagonist used to treat hypertension.",
-])
-print(vectors.shape)  # (2, 4096)
-print(vectors[0] @ vectors[1])  # cosine similarity
+]
+emb = l2v.encode(texts, show_progress_bar=True, convert_to_tensor=True)
+print("Embedding shape:", emb.shape)  # (num_texts, hidden_dim)
+
+sim = F.cosine_similarity(emb[0].unsqueeze(0), emb[1].unsqueeze(0)).item()
+print("Cosine similarity:", round(sim, 4))
 ```
 
-For a CSV containing a `description` column:
-
-```bash
-python embed.py --input data/drugs.csv --output outputs/embeddings
-```
-
-The output contains normalized `embeddings.npy` and `metadata.csv` in matching row order. See [Tutorial.ipynb](Tutorial.ipynb) for nearest-neighbor retrieval from the released embeddings.
+See [Tutorial.ipynb](Tutorial.ipynb) for nearest-neighbor retrieval from the released embeddings.
 
 ## Reproduce the DrugBank model
 
