@@ -4,7 +4,6 @@ Drug embeddings from biomedical literature and drug descriptions. The public rel
 
 - [Models](https://huggingface.co/z-cao/DrugSpace-8B)
 - [Data, embeddings and reproduction resources](https://doi.org/10.5281/zenodo.23022876)
-- [Interactive visualization](https://medviz.org/)
 
 ![DrugSpace workflow: literature MNTP followed by openFDA or DrugBank contrastive alignment](images/fig1.png)
 
