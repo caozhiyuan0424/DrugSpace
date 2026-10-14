@@ -74,7 +74,7 @@ For the full DrugBank model, generate triplets from v5.1.14 (exported 2026-01-04
 
 ## Evaluation
 
-Only the three primary tasks are included. Parse both licensed snapshots; queries are IDs absent from the reference snapshot with creation date after 2020-01-03:
+Parse both licensed snapshots. queries are IDs absent from the reference snapshot with creation date after 2020-01-03:
 
 ```bash
 python data_process/parse_drugbank.py \
