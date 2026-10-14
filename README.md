@@ -1,6 +1,8 @@
 # DrugSpace
 
-Drug embeddings from biomedical literature and drug descriptions. The public release uses openFDA labels and includes 1,867 drug embeddings with 4,096 dimensions.
+DrugSpace is a drug embedding resource for similarity search and downstream biomedical modeling. Its encoder is trained on biomedical literature from PubMed and PubMed Central, followed by contrastive learning on drug descriptions from openFDA labels or DrugBank.
+
+The public release includes a trained encoder and precomputed 4096-dimensional embeddings for 1867 drugs derived from openFDA drug labels. Use the released embeddings directly or generate embeddings from your own drug descriptions.
 
 - [Models](https://huggingface.co/z-cao/DrugSpace-8B)
 - [Data, embeddings and reproduction resources](https://doi.org/10.5281/zenodo.23022876)
@@ -17,8 +19,6 @@ pip install -r requirements.txt
 ```
 
 Run commands from the repository root. On a cluster, run data processing and model workloads inside the appropriate scheduler allocation.
-
-Optional EmbeddingGemma support requires a separate environment with `transformers==4.57.1` and `sentence-transformers==5.1.1`.
 
 ## Quick start
 
